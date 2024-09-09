@@ -22,3 +22,11 @@ func (todos *Todos) add(title string){
 	*todos = append(*todos, todo)
 }
 
+func (todos *Todos) delete(title string){
+	t := *todos
+	for i, value := range t{
+		if value.Title == title{
+			*todos = append(t[:i], t[i+1:]...)
+		}
+	}
+}
