@@ -24,7 +24,7 @@ func Test_delete(t *testing.T) {
 	list.delete("talk")
 
 	if len(list) != 0 {
-		t.Errorf("Test Failed! Expected %v but instead got %v", true, false)
+		t.Errorf("Test Failed!")
 	}
 }
 
@@ -35,7 +35,7 @@ func Test_case_sensitive_delete(t *testing.T) {
 	list.delete("walk")
 
 	if len(list) != 1 {
-		t.Errorf("Test Failed! Expected %v but instead got %v", true, false)
+		t.Errorf("Test Failed!")
 	}
 }
 
@@ -45,13 +45,13 @@ func Test_delete_error(t *testing.T) {
 
 	not_err := list.delete("walk")
 
-	if not_err == nil{
+	if not_err != nil{
 		t.Errorf("Test Failed!")
 	}
 
 	err := list.delete("talk")
 
-	if err != nil{
+	if err == nil{
 		t.Errorf("Test Failed!")
 	}
 }
