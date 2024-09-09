@@ -1,6 +1,10 @@
 package main
 
-import "time"
+import (
+	"errors"
+	"strings"
+	"time"
+)
 
 type Todo struct {
 	Title       string
@@ -9,24 +13,26 @@ type Todo struct {
 	CompletedAt *time.Time
 }
 
-type Todos[] Todo
+type Todos []Todo
 
-func (todos *Todos) add(title string){
+func (todos *Todos) add(title string) {
 	todo := Todo{
-		Title: title,
-		Completed: false,
-		CreatedAt: time.Now(),
+		Title:       title,
+		Completed:   false,
+		CreatedAt:   time.Now(),
 		CompletedAt: nil,
 	}
 
 	*todos = append(*todos, todo)
 }
 
-func (todos *Todos) delete(title string){
+func (todos *Todos) delete(title string) error {
 	t := *todos
-	for i, value := range t{
-		if value.Title == title{
+	for i, value := range t {
+		if strings.EqualFold(value.Title, title) {
 			*todos = append(t[:i], t[i+1:]...)
+			return errors.New("todo not found")
 		}
 	}
+	return nil
 }
