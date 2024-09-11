@@ -2,8 +2,12 @@ package main
 
 import (
 	"errors"
+	"os"
+	"strconv"
 	"strings"
 	"time"
+
+	"github.com/aquasecurity/table"
 )
 
 type Todo struct {
@@ -87,7 +91,7 @@ func (todos *Todos) toggle(input interface{}) error {
 			return err
 		}
 
-		if !t[v].Completed{
+		if !t[v].Completed {
 			completedTime := time.Now()
 			t[v].CompletedAt = &completedTime
 		}
@@ -125,4 +129,26 @@ func (todos *Todos) edit(input interface{}, title string) error {
 	default:
 		return errors.New("invalid input")
 	}
+}
+
+func (todos *Todos) print() {
+	table := table.New(os.Stdout)
+
+	table.SetRowLines(false)
+	table.SetHeaders("#", "Title", "Completed", "Created At", "Completed At")
+	for i, todo := range *todos {
+		completed := "❌"
+		completedAt := ""
+
+		if todo.Completed {
+			completed = "✅"
+			if todo.CompletedAt != nil {
+				completedAt = todo.CompletedAt.Format(time.RFC1123)
+			}
+		}
+
+		table.AddRow(strconv.Itoa(i), todo.Title, completed, completedAt, todo.CreatedAt.Format(time.RFC1123), completedAt)
+	}
+
+	table.Render()
 }
