@@ -95,3 +95,24 @@ func Test_toggle_index(t *testing.T) {
 		t.Errorf("Test Failed!")
 	}
 }
+
+func Test_edit_string(t *testing.T) {
+	list := Todos{}
+	list.add("WALK")
+
+	list.edit("walk", "talk")
+
+	if list[0].Title != "talk" {
+		t.Errorf("Test Failed!")
+	}
+}
+func Test_edit_index(t *testing.T) {
+	list := Todos{}
+	list.add("WALK")
+
+	list.edit(0, "talk")
+
+	if list[0].Title != "talk" {
+		t.Errorf("Test Failed!")
+	}
+}

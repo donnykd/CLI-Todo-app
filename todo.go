@@ -99,3 +99,30 @@ func (todos *Todos) toggle(input interface{}) error {
 		return errors.New("invalid input")
 	}
 }
+
+func (todos *Todos) edit(input interface{}, title string) error {
+	t := *todos
+
+	switch v := input.(type) {
+	case string:
+		for i, value := range t {
+			if strings.EqualFold(value.Title, v) {
+				t[i].Title = title
+				return nil
+			}
+		}
+		return errors.New("todo not found")
+
+	case int:
+		err := t.validateIndex(v)
+		if err != nil {
+			return err
+		}
+
+		t[v].Title = title
+		return nil
+
+	default:
+		return errors.New("invalid input")
+	}
+}
