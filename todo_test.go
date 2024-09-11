@@ -1,6 +1,8 @@
 package main
 
-import "testing"
+import (
+	"testing"
+)
 
 func Test_add(t *testing.T) {
 	list := Todos{}
@@ -45,13 +47,13 @@ func Test_delete_error(t *testing.T) {
 
 	not_err := list.delete("walk")
 
-	if not_err != nil{
+	if not_err != nil {
 		t.Errorf("Test Failed!")
 	}
 
 	err := list.delete("talk")
 
-	if err == nil{
+	if err == nil {
 		t.Errorf("Test Failed!")
 	}
 }
@@ -61,13 +63,35 @@ func Test_add_and_delete(t *testing.T) {
 	list.add("take some photos at the park")
 	list.add("return home")
 
-	if len(list) != 3{
+	if len(list) != 3 {
 		t.Errorf("Test Failed!")
 	}
 
 	list.delete("Take SOME photos at the park")
 
-	if len(list) != 2{
+	if len(list) != 2 {
+		t.Errorf("Test Failed!")
+	}
+}
+
+func Test_toggle_string(t *testing.T) {
+	list := Todos{}
+	list.add("WALK")
+
+	list.toggle("walk")
+
+	if list[0].Completed != true && list[0].CompletedAt == nil {
+		t.Errorf("Test Failed!")
+	}
+}
+
+func Test_toggle_index(t *testing.T) {
+	list := Todos{}
+	list.add("WALK")
+
+	list.toggle(0)
+
+	if list[0].Completed != true && list[0].CompletedAt == nil {
 		t.Errorf("Test Failed!")
 	}
 }

@@ -6,6 +6,8 @@ func main() {
 	list := Todos{}
 
 	list.add("walk")
-	list.add("talk")
-	fmt.Println(len(list))
+
+	list.toggle(0)
+
+	fmt.Println(list[0].CompletedAt)
 }
