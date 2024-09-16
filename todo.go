@@ -19,7 +19,7 @@ type Todo struct {
 
 type Todos []Todo
 
-func (todos *Todos) add(title string) {
+func (todos *Todos) Add(title string) {
 	todo := Todo{
 		Title:       title,
 		Completed:   false,
@@ -38,7 +38,7 @@ func (todos *Todos) validateIndex(index int) error {
 	return nil
 }
 
-func (todos *Todos) delete(input interface{}) error {
+func (todos *Todos) Delete(input interface{}) error {
 	t := *todos
 
 	switch v := input.(type) {
@@ -66,7 +66,7 @@ func (todos *Todos) delete(input interface{}) error {
 	}
 }
 
-func (todos *Todos) toggle(input interface{}) error {
+func (todos *Todos) Toggle(input interface{}) error {
 	t := *todos
 
 	switch v := input.(type) {
@@ -104,7 +104,7 @@ func (todos *Todos) toggle(input interface{}) error {
 	}
 }
 
-func (todos *Todos) edit(input interface{}, title string) error {
+func (todos *Todos) Edit(input interface{}, title string) error {
 	t := *todos
 
 	switch v := input.(type) {
@@ -131,7 +131,7 @@ func (todos *Todos) edit(input interface{}, title string) error {
 	}
 }
 
-func (todos *Todos) print() {
+func (todos *Todos) Print() {
 	table := table.New(os.Stdout)
 
 	table.SetRowLines(false)

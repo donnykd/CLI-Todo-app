@@ -14,7 +14,7 @@ func NewStorage[G any](name string) *Storage[G] {
 	return &Storage[G]{FileName: name}
 }
 
-func (s *Storage[G]) save(data G) error {
+func (s *Storage[G]) Save(data G) error {
 	fileData, err := json.MarshalIndent(data, "", "    ")
 
 	if err != nil {
@@ -24,7 +24,7 @@ func (s *Storage[G]) save(data G) error {
 	return os.WriteFile(s.FileName, fileData, 0644)
 }
 
-func (s *Storage[G]) load (data *G) error{
+func (s *Storage[G]) Load (data *G) error{
 	fileData, err := os.ReadFile(s.FileName)
 
 	if err != nil{
