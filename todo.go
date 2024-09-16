@@ -147,7 +147,7 @@ func (todos *Todos) print() {
 			}
 		}
 
-		table.AddRow(strconv.Itoa(i), todo.Title, completed, completedAt, todo.CreatedAt.Format(time.RFC1123), completedAt)
+		table.AddRow(strconv.Itoa(i), todo.Title, completed, todo.CreatedAt.Format(time.RFC1123), completedAt)
 	}
 
 	table.Render()

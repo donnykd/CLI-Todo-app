@@ -2,9 +2,10 @@ package main
 
 func main() {
 	list := Todos{}
-
+	space := NewStorage[Todos]("todos.json")
 	list.add("walk")
-	list.toggle(0)
-
+	list.add("groceries")
+	list.toggle(1)
+	space.save(list)
 	list.print()
 }
